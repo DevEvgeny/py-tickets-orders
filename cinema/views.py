@@ -1,6 +1,6 @@
 from django.db.models import Count, F
 from rest_framework import viewsets
-from datetime import date
+
 
 from cinema.models import Genre, Actor, CinemaHall, Movie, MovieSession, Order
 
