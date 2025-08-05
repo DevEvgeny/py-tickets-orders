@@ -1,5 +1,6 @@
 from django.db.models import Count, F
 from rest_framework import viewsets
+from datetime import date
 
 from cinema.models import Genre, Actor, CinemaHall, Movie, MovieSession, Order
 
@@ -54,7 +55,7 @@ class MovieViewSet(viewsets.ModelViewSet):
         genres = self.request.query_params.get("genres")
         if genres:
             genre_ids = self._params_to_ints(genres)
-            queryset = queryset.filter(actors__id__in=genre_ids)
+            queryset = queryset.filter(genres__id__in=genre_ids)
 
         return queryset.distinct()
 
