@@ -1,7 +1,6 @@
 from django.db.models import Count, F
 from rest_framework import viewsets
 
-
 from cinema.models import Genre, Actor, CinemaHall, Movie, MovieSession, Order
 
 from cinema.serializers import (
@@ -59,15 +58,14 @@ class MovieViewSet(viewsets.ModelViewSet):
 
         return queryset.distinct()
 
+    def get_serializer_class(self):
+        if self.action == "list":
+            return MovieListSerializer
 
-def get_serializer_class(self):
-    if self.action == "list":
-        return MovieListSerializer
+        if self.action == "retrieve":
+            return MovieDetailSerializer
 
-    if self.action == "retrieve":
-        return MovieDetailSerializer
-
-    return MovieSerializer
+        return MovieSerializer
 
 
 class MovieSessionViewSet(viewsets.ModelViewSet):
